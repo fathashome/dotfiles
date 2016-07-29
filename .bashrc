@@ -1,3 +1,5 @@
+# Load local .bashrc if it exists
+test -f ~/.bashrc-local && source ~/.bashrc-local
 
 #Locations/access
 alias noc='ssh noc1.or1'
@@ -38,13 +40,10 @@ alias fastping='ping -c 100 -s.2'
 # Show open ports
 alias ports='netstat -tulanp'
 # Safety nets
-alias rm='rm -I --preserve-root'
+alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
 # Quick system stats
 ## pass options to free ## 
 alias meminfo='free -m -l -t'
