@@ -1,0 +1,42 @@
+UserKnownHostsFile=/dev/null
+StrictHostKeyChecking=no
+ServerAliveInterval 60
+ForwardAgent yes
+
+Host *demdex.com
+	User supportNOC
+
+Host viper
+	HostName 192.168.0.100
+	Port 22
+	User rvanduren
+	IdentityFile ~/.ssh/viper_rsa
+
+Host retropie
+	HostName 192.168.0.126
+	Port 22
+	User pi
+	IdentityFile ~/.ssh/myid_rsa
+
+Host raspberry
+	HostName 192.168.0.102
+	Port 22
+	User pi
+	IdentityFile ~/.ssh/myid_rsa
+
+Host bastion
+    HostName bastion1.dmz.ut1.omniture.com
+    DynamicForward 50000
+    ForwardAgent yes
+
+Host jump
+    User vanduren@noc1.or1
+    HostName scb.dmz.ut1.adobe.net
+    DynamicForward 50000
+    ForwardAgent yes
+
+Host *.ams1 *.da2 *.dal *.hk1 *.hk2 *.lon *.lon5 *.lon7 *.mai1 *.oak1 *.or1 *.sao1 *.sea1 *.sin2 *.sj1 *.syd2 *.tyo2 *.ut1 *.va5 *.dmz.ut1
+    HostName %h.omniture.com
+    ProxyCommand nc -x localhost:50000 %h %p
+    StrictHostKeyChecking no
+
