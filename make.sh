@@ -5,9 +5,10 @@
 ############################
 
 # variables
-dir=~/.dotfiles                         # dotfiles directory
-olddir=~/dotfiles_old                   # old dotfiles backup directory
+dir=~/.dotfiles                     # dotfiles directory
+olddir=~/dotfiles_old               # old dotfiles backup directory
 files="bashrc vimrc gitconfig"      # list of files/folders to symlink in homedir
+sshfiles="config"					# list of alternate files for ssh config
 
 # move dotfiles to .dotfiles hidden folder
 mv ~/dotfiles $dir
@@ -28,4 +29,11 @@ for file in $files; do
     mv ~/.$file ~/dotfiles_old/
     echo "Creating symlink to $file in home directory."
     ln -s $dir/.$file ~/.$file
+
+# move additional config files to dotfiles_old directory, then create symlinks
+for morefiles in $sshfiles; do
+	echo "Moving ssh config file from ~/.ssh to $olddir"
+	mv ~/.ssh/$sshfiles ~/dotfiles_old/
+	echo "Creating symlink to $sshfiles in home directory."
+	ln -s $dir/$sshfiles ~/.ssh/.$sshfiles
 done
