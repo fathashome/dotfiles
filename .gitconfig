@@ -3,8 +3,6 @@
 	email = fathashome@hotmail.com
 [push]
 	default = simple
-[core]
-	editor = /Applications/Sublime Text.app/Contents/SharedSupport/bin/subl
 [color]
 	ui = true
 	stats = true
