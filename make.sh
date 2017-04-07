@@ -29,11 +29,12 @@ for file in $files; do
     mv ~/.$file ~/dotfiles_old/
     echo "Creating symlink to $file in home directory."
     ln -s $dir/.$file ~/.$file
+done
 
 # move additional config files to dotfiles_old directory, then create symlinks
 for morefiles in $sshfiles; do
 	echo "Moving ssh config file from ~/.ssh to $olddir"
 	mv ~/.ssh/$sshfiles ~/dotfiles_old/
 	echo "Creating symlink to $sshfiles in home directory."
-	ln -s $dir/$sshfiles ~/.ssh/.$sshfiles
+	ln -s $dir/$sshfiles ~/.ssh/$sshfiles
 done
