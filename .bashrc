@@ -3,8 +3,6 @@ test -f ~/.bashrc-local && source ~/.bashrc-local
 
 #Locations/access
 alias noc='ssh noc1.or1'
-alias netops='ssh netops1.dmz.ut1.omniture.com'
-alias jump2='ssh -f -N -q bastion'
 alias jump='ssh jump'
 
 ### Tools ###
@@ -12,6 +10,7 @@ alias cp="rsync -ah --progress"
 alias ll='ls -lahG'
 alias ls='ls -G'
 alias sshs='ps -Afl | grep ssh'
+# Mac tools
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 # Control cd command behavior
@@ -66,3 +65,32 @@ alias zone1='open vnc://10.30.162.224'
 alias zone2='open vnc://10.30.162.227'
 alias zone3='open vnc://10.30.162.230'
 alias zone4='open vnc://10.30.162.225'
+
+# Authentication Agent start
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+            (umask 077; ssh-agent >| "$env")
+            . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+            agent_start
+            ssh-add ~/.ssh/myid_rsa
+                ssh-add ~/.ssh/viper_rsa
+                ssh-add ~/.ssh/id_rsa
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+            ssh-add ~/.ssh/myid_rsa
+                ssh-add ~/.ssh/viper_rsa
+                ssh-add ~/.ssh/id_rsa
+fi
+
+unset env
+
+cd
