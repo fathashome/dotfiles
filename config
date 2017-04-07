@@ -24,11 +24,6 @@ Host raspberry
 	User pi
 	IdentityFile ~/.ssh/myid_rsa
 
-Host bastion
-    HostName bastion1.dmz.ut1.omniture.com
-    DynamicForward 50000
-    ForwardAgent yes
-
 Host jump
     User vanduren@noc1.or1
     HostName scb.dmz.ut1.adobe.net
