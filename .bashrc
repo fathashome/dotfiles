@@ -7,8 +7,8 @@ alias jump='ssh jump'
 
 ### Tools ###
 alias cp="rsync -ah --progress"
-alias ll='ls -lahG'
-alias ls='ls -G'
+alias ll='ls -lahG --color=auto'
+alias ls='ls -G --color=auto'
 alias sshs='ps -Afl | grep ssh'
 # Mac tools
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
