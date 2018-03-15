@@ -4,8 +4,10 @@ test -f ~/.bashrc-local && source ~/.bashrc-local
 #Locations/access
 alias noc='ssh noc1.or1'
 alias jump='ssh jump'
+alias jump2='ssh jump2'
 
 ### Tools ###
+alias ascp='scp -S ~/scpagent.pl'
 alias cp="rsync -ah --progress"
 alias ll='ls -lahG --color=auto'
 alias ls='ls -G --color=auto'
@@ -44,7 +46,7 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
 # Quick system stats
-## pass options to free ## 
+## pass options to free ##
 alias meminfo='free -m -l -t'
 ## get top process eating memory
 alias psmem='ps aux | sort -nr -k 4'
@@ -56,7 +58,7 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 alias cpuinfo='lscpu'
 ## older system use /proc/cpuinfo ##
 ##alias cpuinfo='less /proc/cpuinfo' ##
-## get GPU ram on desktop / laptop## 
+## get GPU ram on desktop / laptop##
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
 
@@ -65,32 +67,3 @@ alias zone1='open vnc://10.30.162.224'
 alias zone2='open vnc://10.30.162.227'
 alias zone3='open vnc://10.30.162.230'
 alias zone4='open vnc://10.30.162.225'
-
-# Authentication Agent start
-env=~/.ssh/agent.env
-
-agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-agent_start () {
-            (umask 077; ssh-agent >| "$env")
-            . "$env" >| /dev/null ; }
-
-agent_load_env
-
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-            agent_start
-            ssh-add ~/.ssh/myid_rsa
-                ssh-add ~/.ssh/viper_rsa
-                ssh-add ~/.ssh/id_rsa
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-            ssh-add ~/.ssh/myid_rsa
-                ssh-add ~/.ssh/viper_rsa
-                ssh-add ~/.ssh/id_rsa
-fi
-
-unset env
-
-cd
