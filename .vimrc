@@ -1,10 +1,5 @@
 syntax enable
 colorscheme monokai
-<<<<<<< HEAD
-=======
-"colo desert
-"syntax on
->>>>>>> 1d5bc1b6b1c3e38a5ff430285d83aac122b66585
 
 " Spaces & Tabs
 " =============================================================================
