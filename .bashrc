@@ -7,11 +7,8 @@ alias jump='ssh jump'
 alias jump2='ssh jump2'
 
 ### Tools ###
-<<<<<<< HEAD
 alias ascp='scp -S ~scpagent.pl'
-=======
 alias ascp='scp -S ~/scpagent.pl'
->>>>>>> 1d5bc1b6b1c3e38a5ff430285d83aac122b66585
 alias cp="rsync -ah --progress"
 alias ll='ls -lahG --color=auto'
 alias ls='ls -G --color=auto'
@@ -71,3 +68,30 @@ alias zone1='open vnc://10.30.162.224'
 alias zone2='open vnc://10.30.162.227'
 alias zone3='open vnc://10.30.162.230'
 alias zone4='open vnc://10.30.162.225'
+
+# Authentication Agent start
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+            (umask 077; ssh-agent >| "$env")
+            . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+            agent_start
+                ssh-add ~/.ssh/viper_rsa
+                ssh-add ~/.ssh/id_rsa
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+                ssh-add ~/.ssh/viper_rsa
+                ssh-add ~/.ssh/id_rsa
+fi
+
+unset env
+
+cd
