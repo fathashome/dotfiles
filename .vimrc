@@ -1,5 +1,5 @@
-colo desert
-syntax on
+syntax enable
+colorscheme monokai
 
 " Spaces & Tabs
 " =============================================================================

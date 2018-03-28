@@ -6,6 +6,7 @@ alias noc='ssh noc1.or1'
 alias jump='ssh jump'
 
 ### Tools ###
+alias ascp='scp -S ~scpagent.pl'
 alias cp="rsync -ah --progress"
 alias ll='ls -lahG --color=auto'
 alias ls='ls -G --color=auto'
