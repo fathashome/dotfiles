@@ -5,10 +5,17 @@ test -f ~/.bashrc-local && source ~/.bashrc-local
 alias noc='ssh noc1.or1'
 alias jump='ssh jump'
 alias jump2='ssh jump2'
+alias viper='ssh viper'
+alias vip3r='ssh vip3r'
+
+# Vault alias
+#alias vault='/home/vanduren/bin/tools/vault'
+alias vaultauth='vault auth -method=ldap username=vanduren'
+alias vaultlist='vault list secret/dxgoc'
+
 
 ### Tools ###
-alias ascp='scp -S ~scpagent.pl'
-alias ascp='scp -S ~/scpagent.pl'
+alias ascp='scp -S ~/bin/scpagent.pl'
 alias cp="rsync -ah --progress"
 alias ll='ls -lahG --color=auto'
 alias ls='ls -G --color=auto'
@@ -62,6 +69,9 @@ alias cpuinfo='lscpu'
 ## get GPU ram on desktop / laptop##
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
+# PATH settings
+export VAULT_ADDR=https://vault.loc.adobe.net
+export PATH=${PATH}:${HOME}/bin
 
 # Open VNC for GOC wall zone computers
 alias zone1='open vnc://10.30.162.224'
@@ -87,11 +97,15 @@ if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
             agent_start
                 ssh-add ~/.ssh/viper_rsa
                 ssh-add ~/.ssh/id_rsa
+				ssh-add ~/.ssh/viper-id_rsa
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
                 ssh-add ~/.ssh/viper_rsa
                 ssh-add ~/.ssh/id_rsa
+				ssh-add ~/.ssh/viper-id_rsa
 fi
 
 unset env
 
 cd
+
+complete -C /home/vanduren/bin/tools/vault vault
