@@ -3,26 +3,11 @@ StrictHostKeyChecking=no
 ServerAliveInterval 60
 ForwardAgent yes
 
-Host *demdex.com
-	User supportNOC
-
-Host vip3r
-	HostName 192.168.0.5
-	Port 22
-	User rvanduren
-	IdentityFile ~/.ssh/viper_rsa
-
 Host viper
 	HostName 192.168.0.10
 	Port 22
 	User vanduren
 	IdentityFile ~/.ssh/viper-id_rsa
-
-Host cobra
-	HostName 192.168.0.10
-	Port 22
-	User rvanduren
-	IdentityFile ~/.ssh/cobra_rsa
 
 Host jump
     User vanduren@noc1.or1
