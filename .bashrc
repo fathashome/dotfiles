@@ -6,7 +6,8 @@ alias noc='ssh noc1.or1'
 alias jump='ssh jump'
 alias jump2='ssh jump2'
 alias viper='ssh viper'
-alias vip3r='ssh vip3r'
+alias noc3='ssh noc3'
+alias noc2='ssh noc2'
 
 # Vault alias
 #alias vault='/home/vanduren/bin/tools/vault'
@@ -15,7 +16,7 @@ alias vaultlist='vault list secret/dxgoc'
 
 
 ### Tools ###
-alias ascp='scp -S ~/bin/scpagent.pl'
+alias ascp='scp -rS ~/bin/scpagent.pl'
 alias cp="rsync -ah --progress"
 alias ll='ls -lahG --color=auto'
 alias ls='ls -G --color=auto'
