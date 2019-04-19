@@ -4,10 +4,16 @@ ServerAliveInterval 60
 ForwardAgent yes
 
 Host viper
-	HostName 192.168.0.10
-	Port 22
-	User vanduren
-	IdentityFile ~/.ssh/viper-id_rsa
+    HostName 192.168.0.10
+    Port 22
+    User vanduren
+    IdentityFile ~/.ssh/viper-id_rsa
+
+Host octopi
+    HostName 192.168.0.196
+    Port 22
+    User pi
+    IdentityFile ~/.ssh/octopi_id_rsa
 
 Host jump
     User vanduren@noc1.or1
@@ -15,13 +21,27 @@ Host jump
     HostName scb.dmz.ut1.adobe.net
     DynamicForward 50000
     ForwardAgent yes
+    
+Host noc2
+    User vanduren@noc2.dmz.ut1
+    IdentityFile ~/.ssh/id_rsa
+    HostName scb.dmz.ut1.adobe.net
+    DynamicForward 50000
+    ForwardAgent yes
+    
+Host noc3
+    User vanduren@noc3.dmz.ut1
+    IdentityFile ~/.ssh/id_rsa
+    HostName scb.dmz.ut1.adobe.net
+    DynamicForward 50000
+    ForwardAgent yes
 
 Host jump2
-        User vanduren@noc1.or1
-        IdentityFile ~/.ssh/id_rsa
-        HostName scb.dmz.or1.adobe.net
-        DynamicForward 50000
-        ForwardAgent yes
+    User vanduren@noc1.or1
+    IdentityFile ~/.ssh/id_rsa
+    HostName scb.dmz.or1.adobe.net
+    DynamicForward 50000
+    ForwardAgent yes
 
 Host *.ams1 *.da2 *.dal *.hk1 *.hk2 *.lon *.lon5 *.lon7 *.mai1 *.oak1 *.or1 *.sao1 *.sea1 *.sin2 *.sj1 *.syd2 *.tyo2 *.ut1 *.va5 *.dmz.ut1
     HostName %h.omniture.com
