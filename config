@@ -3,6 +3,12 @@ StrictHostKeyChecking=no
 ServerAliveInterval 60
 ForwardAgent yes
 
+Host mrfusion
+    User vanduren
+    IdentityFile ~/.ssh/id_rsa
+    HostName mrfusion.corp.adobe.com
+    ForwardAgent yes
+
 Host viper
     HostName 192.168.0.10
     Port 22
