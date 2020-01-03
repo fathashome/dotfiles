@@ -11,11 +11,12 @@ alias noc2='ssh noc2'
 
 # Vault alias
 #alias vault='/home/vanduren/bin/tools/vault'
-alias vaultauth='vault auth -method=ldap username=vanduren'
+alias vaultauth='vault login -method=ldap username=vanduren'
 alias vaultlist='vault list secret/dxgoc'
 
 
 ### Tools ###
+alias tree='tree pahCL 2'
 alias ascp='scp -rS ~/bin/scpagent.pl'
 alias cp="rsync -ah --progress"
 alias ll='ls -lahG --color=auto'
@@ -74,12 +75,6 @@ alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 export VAULT_ADDR=https://vault.loc.adobe.net
 export PATH=${PATH}:${HOME}/bin
 
-# Open VNC for GOC wall zone computers
-alias zone1='open vnc://10.30.162.224'
-alias zone2='open vnc://10.30.162.227'
-alias zone3='open vnc://10.30.162.230'
-alias zone4='open vnc://10.30.162.225'
-
 # Authentication Agent start
 env=~/.ssh/agent.env
 
@@ -96,13 +91,13 @@ agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
 if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
             agent_start
-                ssh-add ~/.ssh/viper_rsa
+                ssh-add ~/.ssh/octopi_id_rsa
                 ssh-add ~/.ssh/id_rsa
-				ssh-add ~/.ssh/viper-id_rsa
+		ssh-add ~/.ssh/viper-id_rsa
 elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-                ssh-add ~/.ssh/viper_rsa
+                ssh-add ~/.ssh/octopi_id_rsa
                 ssh-add ~/.ssh/id_rsa
-				ssh-add ~/.ssh/viper-id_rsa
+		ssh-add ~/.ssh/viper-id_rsa
 fi
 
 unset env
